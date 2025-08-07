@@ -21,9 +21,14 @@ I am currently following **Adrian Cantrill’s AWS SCS course**, performing prac
 - Practiced security access key management for CLI use cases.
 - Installed and configured the AWS CLI on Linux with named profiles for both accounts to enable streamlined multi-account management.
 
-### 🔄 Module 2 – [To Be Documented]
+### ✅ Module 2 – Management and Security Governance
 
-- Notes and labs for this module will be added as I progress.
+- Created an AWS Organization with Management as the root account.
+- Invited the Production account to join and configured role delegation using OrganizationAccountAccessRole.
+- Tested Switch Role functionality from Management to Production.
+- Created a Development account after increasing the account quota through a service request.
+- Set up organizational units (OUs) for Production and Development and moved accounts accordingly.
+- Tested Service Control Policies (SCPs) by restricting S3 actions in the Production OU and validated enforcement.
 
 ### 🔄 Module 3 – [To Be Documented]
 
