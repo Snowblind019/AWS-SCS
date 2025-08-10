@@ -30,9 +30,29 @@ I am currently following **Adrian Cantrill’s AWS SCS course**, performing prac
 - Set up organizational units (OUs) for Production and Development and moved accounts accordingly.
 - Tested Service Control Policies (SCPs) by restricting S3 actions in the Production OU and validated enforcement.
 
-### 🔄 Module 3 – [To Be Documented]
+### ✅ Module 3 – Domain 4: Identity and Access Management
 
-- Notes and labs for this module will be added as I progress.
+- Created an IAM user permission boundary policy (`a4luserboundary`) restricting created users to **S3**, **CloudWatch**, and **EC2** services, while allowing them to manage their own credentials.
+- Created an IAM admin delegate boundary policy (`a4ladminboundary`) allowing delegated administration only for users with a specific permission boundary, while preventing changes to the boundary policies themselves.
+- Created an IAM admin permission policy (`a4ladminpermissionpolicy`) granting full IAM permissions and limited CloudWatch access.
+- Created a user **bob**, attached the admin permission policy, and enforced the admin boundary to restrict actions.
+- Deployed a CloudFormation template (`WEBIDF`) creating:
+  - Two S3 buckets (public and private) with images.
+  - A CloudFront distribution (`d1r78yms5ewf7x.cloudfront.net`).
+- Created a Google OAuth 2.0 Web Client for **PETIDFServerlessApp** and configured it for Cognito integration.
+- Created a Cognito Identity Pool with Google as an authentication provider, an associated IAM role (`PETIDFIDPoolAuth_Role`), and attached a policy allowing access to the private S3 bucket.
+- Updated public S3 website files (`index.htm`, `scripts.js`) with correct IDs to enable Google login for private content access.
+- Verified Google SSO login via CloudFront and private bucket access.
+- Enabled AWS IAM Identity Center (SSO), customized the access portal URL, and created permission sets for Admin, PowerUser, ViewOnly, and Billing with 4-hour sessions.
+- Created **Sally Jenkins** in the Billing group with Organization-wide billing permissions, tested, then expanded her access to PowerUser for validation.
+- Created an **iamadmin** user in the `A4L-ADMINS` group with MFA enabled.
+- Demonstrated **S3 pre-signed URLs** via AWS CLI.
+- Tested IAM deny policies by applying and removing an inline `s3:*` deny policy to validate access restrictions.
+- Experimented with **cross-account S3 access** via ACLs and bucket policies, and tested **object ownership settings** to resolve ownership conflicts.
+- Created a cross-account role in Production and validated access from Management using **Switch Role**.
+- Deployed an EC2 Instance Metadata lab via CloudFormation and explored metadata retrieval using:
+  - `curl` commands to `/latest/meta-data/`
+  - `ec2-metadata` script for detailed instance data.
 
 ### 🔄 Module 4 – [To Be Documented]
 
