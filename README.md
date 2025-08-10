@@ -54,9 +54,41 @@ I am currently following **Adrian Cantrill’s AWS SCS course**, performing prac
   - `curl` commands to `/latest/meta-data/`
   - `ec2-metadata` script for detailed instance data.
 
-### 🔄 Module 4 – [To Be Documented]
+### ✅ Module 4 – Domain 1: Threat Detection and Incident Response
 
-- Notes and labs for this module will be added as I progress.
+- Deployed a CloudFormation stack in the **Management** account that launched two EC2 instances for security testing.
+- Simulated an **Instance Metadata Service (IMDS) exploitation** by:
+  - Using `curl` from within EC2 to retrieve IAM role credentials:
+    ```bash
+    curl http://169.254.169.254/latest/meta-data/iam/security-credentials/
+    curl http://169.254.169.254/latest/meta-data/iam/security-credentials/<ROLE_NAME>
+    ```
+  - Extracted **Access Key**, **Secret Key**, and **Session Token** values.
+- Tested credential misuse locally:
+  - **Linux / macOS**
+    ```bash
+    export AWS_ACCESS_KEY_ID=<ACCESS_KEY>
+    export AWS_SECRET_ACCESS_KEY=<SECRET_KEY>
+    export AWS_SESSION_TOKEN=<SESSION_TOKEN>
+    aws s3 ls
+    aws ec2 describe-instances --region us-east-1
+    ```
+  - **Windows CMD**
+    ```cmd
+    SET AWS_ACCESS_KEY_ID=<ACCESS_KEY>
+    SET AWS_SECRET_ACCESS_KEY=<SECRET_KEY>
+    SET AWS_SESSION_TOKEN=<SESSION_TOKEN>
+    aws s3 ls
+    aws ec2 describe-instances --region us-east-1
+    ```
+- Confirmed that attacker-style access allowed S3 bucket listing and EC2 enumeration.
+- Validated persistence of credentials after EC2 stop/start and repeated the curl extraction to retrieve new temporary credentials.
+- **Incident Response Actions**:
+  - Revoked all active sessions for the affected IAM role to immediately invalidate stolen credentials.
+  - Created and executed a script to revoke any sessions issued before the current timestamp.
+  - Forced all EC2 instances using the role to **stop and restart** to trigger reissuance of secure credentials.
+- Demonstrated how revoking sessions and restarting affected resources can mitigate credential theft **without removing IAM roles or permissions** required for legitimate workloads.
+
 
 ### 🔄 Module 5 – [To Be Documented]
 
