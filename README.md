@@ -90,9 +90,17 @@ I am currently following **Adrian Cantrill’s AWS SCS course**, performing prac
 - Demonstrated how revoking sessions and restarting affected resources can mitigate credential theft **without removing IAM roles or permissions** required for legitimate workloads.
 
 
-### 🔄 Module 5 – [To Be Documented]
+### ✅ Module 5 – Domain 3: Infrastructure Security
 
-- Notes and labs for this module will be added as I progress.
+- Built a 3-AZ production-grade VPC with 12 subnets (public/private), NAT gateways, internet gateway, route tables, and IPv6 support.
+- Deployed infrastructure via CloudFormation for consistency and reusability.
+- Launched a bastion EC2 host in a public subnet with dual-stack networking and verified connectivity using security groups and NACLs.
+- Set up a Site-to-Site VPN using pfSense+ to simulate hybrid environments and validated tunnel encryption and routing.
+- Created VPC Endpoints for S3 and EC2 Instance Connect with strict policies for granular access control.
+- Implemented VPC Peering across 3 VPCs and confirmed secure traffic flow by adjusting route tables and SGs.
+- Mounted and managed EBS volumes persistently on Linux EC2 instances and tested snapshot-based restoration.
+- Compared EBS and Instance Store volume behavior, observing persistence across reboot vs stop/start scenarios.
+
 
 ### 🔄 Module 6 – [To Be Documented]
 
